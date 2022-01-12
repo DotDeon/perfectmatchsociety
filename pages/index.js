@@ -19,7 +19,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className="hidden sticky bg-purple top-0 z-50 md:flex justify-between lg:px-36">
+      <header className="sticky bg-purple top-0 z-50 flex justify-between lg:px-36 px-4">
         {/* Left */}
         <div className="flex items-center justify-center flex-row">
           <div
@@ -39,7 +39,7 @@ export default function Home() {
         {/* Middle */}
         {/* <div className="flex items-center  py-2"> */}
         <div className="flex items-center space-x-9 space-between text-white">
-          <div className="flex items-center space-x-10 justify-start text-white">
+          <div className="hidden md:flex items-center space-x-10 justify-start text-white">
             <p
               className={
                 'hidden md:inline-flex text-lg font-bold cursor-pointer hover:text-green text-black'
@@ -70,7 +70,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="lg:flex hidden relative flex-row md:space-x-8">
+          <div className="flex relative flex-row space-x-4 md:space-x-8">
             <a
               target="_blank"
               href="https://opensea.io"
@@ -135,29 +135,29 @@ export default function Home() {
 
       <div className=" justify-center items-center flex flex-col bg-purple min-h-screen min-w-screen">
         {/* Banner */}
-        <div className="grid grid-cols-3 md:px-14 2xl:px-36 pt-20 justify-center items-center mb-20 2xl:mb-48">
-          <div className="col-span-2 mx-14 items-start -ml-10">
-            <p className=" text-2xl md:text-6xl font-bold mt-5 2xl:text-9xl">
+        <div className="grid grid-cols-2 md:grid-cols-3 md:px-14 2xl:px-36 pt-20 justify-center items-center mb-20 2xl:mb-48">
+          <div className="col-span-2 mx-14 items-center 2xl-ml-10">
+            <p className=" text-2xl md:text-6xl font-bold mt-5 2xl:text-9xl text-center md:text-left">
               Welcome to the Perfect Match Society!
             </p>
-            <p className="text-xl md:text-3xl font-bold mt-12 mr-16">
+            <p className="text-xl md:text-3xl font-bold mt-12 md:mr-16 text-center md:text-left">
               Welcome to the Perfect Match Society. A collection of 10,000 PMS
               living on the Ethereum Blockchain and inspired by Doodles x Cool
               Cats x WGMInterface. They are randomly generated and composed of a
               variety of hand-drawn traits
             </p>
-            <div className="mt-10">
-              <a className=" bg-black px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg rounded-full text-white font-bold hover:bg-green hover:text-purple">
+            <div className="mt-10 flex flex-col md:flex-row justify-center items-center">
+              <a className=" bg-black px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg rounded-full text-white font-bold hover:bg-green hover:text-purple text-center">
                 {' '}
                 MINT 0.01 ETH
               </a>
-              <a className="text-black font-bold text-lg ml-12 2xl:text-3xl">
+              <a className="text-black font-bold text-lg md:ml-12 2xl:text-3xl">
                 {' '}
-                10, 000/ 10, 000 left
+                10,000/ 10,000 left
               </a>
             </div>
           </div>
-          <div className="items-start">
+          <div className="hidden md:flex  flex-row md:items-start  items-center">
             <Image
               src={icon}
               objectFit="fill"
@@ -165,6 +165,18 @@ export default function Home() {
               // height={450}
               className="bg-green rounded-3xl hover:bg-yellow"
             />
+          </div>
+          <div className="flex mx-auto flex-row justify-center items-center ml-20 mt-10">
+            <div className="md:hidden flex  flex-row md:items-start  items-center">
+              <Image
+                src={icon}
+                layout="fixed"
+                objectFit="contain"
+                width={350}
+                height={350}
+                className="bg-green rounded-3xl hover:bg-yellow"
+              />
+            </div>
           </div>
         </div>
         {/* Banner */}
@@ -185,66 +197,69 @@ export default function Home() {
                 <div className="mb-8 top-0 flex justify-start items-center w-full">
                   <div className="order-2 w-12/12"></div>
                   <div className="z-20">
-                    <div className="h-7 w-7 bg-black rounded-full -mt-12"></div>
+                    <div className="h-7 w-7 bg-black rounded-full -mt-20 md:-mt-18"></div>
                   </div>
                   <div className="order-1 ml-10 mt-8">
                     <div className="flex flex-row">
-                      <h3 className="mb-3 font-bold underline  text-4xl">
-                        Mint Phase
+                      <h3 className="mb-3 font-bold underline  text-xl  md:text-4xl">
+                        Pre-Launch / Mint Phase
                       </h3>
                     </div>
-                    <ul className="list-disc text-xl ">
-                      <li>NFT Giveaway</li>
-                      <li>Community Funds(Dao)</li>
-                      <li>Instant Reveal</li>
-                      <li>Marketing</li>
+                    <ul className="list-disc md:text-xl ">
+                      <li>Building the Perfect Match Society</li>
+                      <li>Sneak Peeks</li>
+                      <li>Whitelisting</li>
+                      <li>10 000 collection, 0.01 ETH</li>
+                      <li>Private Sale 24h (Whitelist)</li>
+                      <li>Public Sale</li>
                     </ul>
                   </div>
                 </div>
 
-                <div className="mb-8 top-0 flex justify-start items-start w-full">
+                <div className="mb-10 top-0 flex justify-start items-start w-full">
                   <div className="order-2 w-12/12"></div>
                   <div className="z-20">
                     <div className="h-7 w-7 bg-black rounded-full"></div>
                   </div>
                   <div className="order-1 ml-10 -mt-2 ">
                     <div className="flex flex-row">
-                      <h3 className="mb-3 font-bold underline  text-4xl">
+                      <h3 className="mb-3 font-bold underline   text-xl  md:text-4xl">
                         Post Launch Phase
                       </h3>
                     </div>
                     <div className="flex flex-col justify-center items-center ">
-                      <ul className="list-disc text-xl ">
+                      <ul className="list-disc md:text-xl ">
+                        <li>Reward our community </li>
                         <li>
-                          Use the community finds to buy and fractionalize NFTs
-                          for the holders
+                          Sweep Floors (Perfect Match and other projects...){' '}
                         </li>
-                        <li>Royalties to the community funds (5%)</li>
-                        <li>
-                          Members receqve $PMS tokens representqng the
-                          fractqonal shares of NFTs held qn the communqty
-                          fallety
-                        </li>
-                        <li> Governance vote</li>
+                        <li>Society Bank (Community Funds) </li>
+                        <li>5% Royalties to Society Bank </li>
+                        <li>Giveaways, Art Contests, Meme Contest... </li>
+                        <li>Twitter Spaces, AMAs, and Community Games!</li>
                       </ul>
                     </div>
                   </div>
                 </div>
 
-                <div className="mb-8 top-0 flex justify-start items-start w-full">
+                <div className="mb-8 top-0 flex justify-start items-start w-full mt-2 md:mt-2">
                   <div className="order-2 w-12/12"></div>
                   <div className="z-20">
-                    <div className="h-7 w-7 bg-black rounded-full"></div>
+                    <div className="h-7 w-7 bg-black rounded-full mt-8"></div>
                   </div>
-                  <div className="order-1 ml-10 -mt-2 ">
+                  <div className="order-1 ml-10 -mt-4 md:mt-2 ">
                     <div className="flex flex-row">
-                      <h3 className="mb-3 font-bold underline  text-4xl">
-                        Third Phase
+                      <h3 className="mb-3 font-bold underline  text-xl  md:text-4xl">
+                        Third Phase (Roadmap Part II)
                       </h3>
                     </div>
-                    <div className="flex flex-col justify-center items-center">
-                      <ul className="list-disc text-xl ">
-                        <li>Let the communqty decqde of our future</li>
+                    <div className="flex flex-col justify-center items-left">
+                      <ul className="list-disc md:text-xl ">
+                        <li>New marketing plans</li>
+                        <li>Hire new talents in the team</li>
+                        <li>Merch for the community</li>
+                        <li>Collaboration with brands</li>
+                        <li>Perfect Match Society meetup!</li>
                         {/* <li>Royalties to the community funds (5%)</li>
                         <li>Instant Reveal</li>
                         <li>Marketing</li> */}
@@ -264,7 +279,7 @@ export default function Home() {
           <p className=" text-6xl font-bold mt-5">FAQs</p>
           <div className="flex min-w-screen relative flex-col py-10">
             {/* FAQ1 */}
-            <div className=" border-r-blue border-r-8 border-b-blue border-b-8 shadow-md w-[900px] 2xl:w-[1400px]">
+            <div className=" border-r-blue border-r-8 border-b-blue border-b-8 shadow-md md:w-[900px] 2xl:w-[1400px]">
               <div className="tab w-full overflow-hidden border border-1 border-blue py-3 ">
                 <input
                   className="absolute opacity-0 "
@@ -273,7 +288,7 @@ export default function Home() {
                   name="tabs"
                 />
                 <label
-                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-4xl"
+                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-4xl"
                   htmlFor="tab-multi-one"
                 >
                   1. How many PMS are there?
@@ -288,7 +303,7 @@ export default function Home() {
             {/* FAQ1 */}
 
             {/* FAQ2 */}
-            <div className=" border-r-yellow border-r-8 border-b-yellow border-b-8 shadow-md w-[900px] 2xl:w-[1400px]">
+            <div className=" border-r-yellow border-r-8 border-b-yellow border-b-8 shadow-md md:w-[900px] 2xl:w-[1400px]">
               <div className="tab w-full overflow-hidden border border-1 border-yellow">
                 <input
                   className="absolute opacity-0 "
@@ -297,7 +312,7 @@ export default function Home() {
                   name="tabs"
                 />
                 <label
-                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-4xl"
+                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-4xl"
                   htmlFor="tab-multi-two"
                 >
                   2. How much will it cost?
@@ -312,7 +327,7 @@ export default function Home() {
             {/* FAQ2 */}
 
             {/* FAQ3 */}
-            <div className=" border-r-pink border-r-8 border-b-pink border-b-8 shadow-md w-[900px] 2xl:w-[1400px]">
+            <div className=" border-r-pink border-r-8 border-b-pink border-b-8 shadow-md md:w-[900px] 2xl:w-[1400px]">
               <div className="tab w-full overflow-hidden border border-1 border-pink">
                 <input
                   className="absolute opacity-0 "
@@ -321,7 +336,7 @@ export default function Home() {
                   name="tabs"
                 />
                 <label
-                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-4xl"
+                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-4xl"
                   htmlFor="tab-multi-three"
                 >
                   3. Wen reveal?
@@ -336,7 +351,7 @@ export default function Home() {
             {/* FAQ3 */}
 
             {/* FAQ4 */}
-            <div className=" border-r-green border-r-8 border-b-green border-b-8 shadow-md w-[900px] 2xl:w-[1400px]">
+            <div className=" border-r-green border-r-8 border-b-green border-b-8 shadow-md md:w-[900px] 2xl:w-[1400px]">
               <div className="tab w-full overflow-hidden border border-1 border-green">
                 <input
                   className="absolute opacity-0 "
@@ -345,7 +360,7 @@ export default function Home() {
                   name="tabs"
                 />
                 <label
-                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-4xl"
+                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-4xl"
                   htmlFor="tab-multi-four"
                 >
                   4. When is launch?
@@ -358,7 +373,7 @@ export default function Home() {
             {/* FAQ4 */}
 
             {/* FAQ5 */}
-            <div className=" border-r-blue border-r-8 border-b-blue border-b-8 shadow-md w-[900px] 2xl:w-[1400px]">
+            <div className=" border-r-blue border-r-8 border-b-blue border-b-8 shadow-md md:w-[900px] 2xl:w-[1400px]">
               <div className="tab w-full overflow-hidden border border-1 border-blue">
                 <input
                   className="absolute opacity-0 "
@@ -367,7 +382,7 @@ export default function Home() {
                   name="tabs"
                 />
                 <label
-                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-4xl"
+                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-4xl"
                   htmlFor="tab-multi-five"
                 >
                   5. How do I purchase a PMS?
@@ -382,7 +397,7 @@ export default function Home() {
             {/* FAQ5 */}
 
             {/* FAQ6 */}
-            <div className=" border-r-yellow border-r-8 border-b-yellow border-b-8 shadow-md w-[900px] 2xl:w-[1400px]">
+            <div className=" border-r-yellow border-r-8 border-b-yellow border-b-8 shadow-md md:w-[900px] 2xl:w-[1400px]">
               <div className="tab w-full overflow-hidden border border-1 border-yellow">
                 <input
                   className="absolute opacity-0 "
@@ -391,7 +406,7 @@ export default function Home() {
                   name="tabs"
                 />
                 <label
-                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-4xl"
+                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-4xl"
                   htmlFor="tab-multi-six"
                 >
                   6. Are some PMS more rare than others?
