@@ -18,3 +18,148 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/* Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Tab content - closed */
+.tab-content {
+  max-height: 0;
+  background-color: #b6b7ff;
+  color: #b6b7ff;
+  -webkit-transition: max-height 0.35s;
+  -o-transition: max-height 0.35s;
+  transition: max-height 0.35s;
+}
+/* :checked - resize to full height */
+.tab input:checked ~ .tab-content {
+  max-height: 100vh;
+}
+/* Label formatting when open */
+.tab input:checked + label {
+  /*@apply text-xl p-5 border-l-2 border-indigo-500 bg-gray-100 text-indigo*/
+  font-size: 1.25rem; /*.text-xl*/
+  padding: 1.25rem; /*.p-5*/
+
+  background-color: #b6b7ff; /*.bg-gray-100 */
+  color: #000000;
+}
+/* Icon */
+.tab label::after {
+  float: right;
+  right: 0;
+  top: 0;
+  display: block;
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5;
+  font-size: 1.25rem;
+  text-align: center;
+  -webkit-transition: all 0.35s;
+  -o-transition: all 0.35s;
+  transition: all 0.35s;
+}
+/* Icon formatting - closed */
+.tab input[type='checkbox'] + label::after {
+  content: '+';
+  font-weight: bold; /*.font-bold*/
+  border-width: 1px; /*.border*/
+  border-radius: 9999px; /*.rounded-full */
+
+  border-color: #b6b7ff; /*.border-grey*/
+}
+.tab input[type='radio'] + label::after {
+  content: '\25BE';
+  font-weight: bold; /*.font-bold*/
+  border-width: 1px; /*.border*/
+  border-radius: 9999px; /*.rounded-full */
+
+  border-color: #ffeea6; /*.border-grey*/
+}
+/* Icon formatting - open */
+.tab input[type='checkbox']:checked + label::after {
+  transform: rotate(315deg);
+  background-color: #ffeea6; /*.bg-indigo*/
+  color: #b6b7ff; /*.text-grey-lightest*/
+}
+.tab input[type='radio']:checked + label::after {
+  transform: rotateX(180deg);
+  background-color: #ffeea6; /*.bg-indigo*/
+  color: #b6b7ff; /*.text-grey-lightest*/
+}
+/* 
+
+/*Image Hover*/
+.image {
+  position: relative;
+  width: 200px;
+}
+
+.image__img {
+  display: block;
+  width: 80%;
+}
+
+.image__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.image__overlay--blur {
+  backdrop-filter: blur(5px);
+}
+
+.image__overlay--primary {
+  background: #ffeea6;
+}
+
+.image__overlay > * {
+  transform: translateY(20px);
+  transition: transform 0.25s;
+}
+
+.image__overlay:hover {
+  opacity: 1;
+}
+
+.image__overlay:hover > * {
+  transform: translateY(0);
+}
+
+.image__title {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.image__description {
+  font-size: 1.25em;
+  margin-top: 0.25em;
+}
+
+.toggle-checkbox:checked {
+  @apply: right-0 border-green-400;
+  right: 0;
+  border-color: #ffeea6;
+}
+.toggle-checkbox:checked + .toggle-label {
+  @apply: bg-green-400;
+  background-color: #ffeea6;
+}
