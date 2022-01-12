@@ -166,7 +166,7 @@ export default function Home() {
               className="bg-green rounded-3xl hover:bg-yellow"
             />
           </div>
-          <div className="flex mx-auto flex-row justify-center items-center ml-20 mt-10">
+          <div className="flex mx-auto flex-row justify-center items-center ml-10 mt-10">
             <div className="md:hidden flex  flex-row md:items-start  items-center">
               <Image
                 src={icon}
