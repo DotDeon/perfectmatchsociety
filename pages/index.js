@@ -194,7 +194,7 @@ export default function Home() {
                 </div>
 
                 <div className="mb-8 top-0 flex justify-between items-center w-full">
-                  <div className="order-2 w-6/12"></div>
+                  <div className="order-2 w-12/12"></div>
                   <div className="z-20">
                     <div className="h-7 w-7 bg-black rounded-full"></div>
                   </div>
@@ -204,13 +204,41 @@ export default function Home() {
                         Post Launch Phase
                       </h3>
                     </div>
+                    <div className="flex flex-col">
+                      <ul class="list-disc">
+                        <li>
+                          Now this is a story all about how, my life got flipped
+                          turned upside down
+                        </li>
+                      </ul>
 
-                    <p className="text-base leading-snug w-full tracking-wide text-gray-900 text-opacity-100">
-                      • Use the community finds to buy and fractionalize NFTs
-                      for the holders • Royalties to the community funds (5%)
-                      <br />
-                      • Instant Reveal <br />• Marketing
-                    </p>
+                      <ol class="list-decimal">
+                        <li>
+                          Now this is a story all about how, my life got flipped
+                          turned upside down
+                        </li>
+                      </ol>
+
+                      <ul class="list-none">
+                        <li>
+                          Now this is a story all about how, my life got flipped
+                          turned upside down
+                        </li>
+                      </ul>
+                      <p className="flex text-base leading-snug w-full tracking-wide text-gray-900 text-opacity-100">
+                        • Use the community finds to buy and fractionalize NFTs
+                        for the holders
+                      </p>
+                      <p className="flex text-base leading-snug w-full tracking-wide text-gray-900 text-opacity-100">
+                        • Royalties to the community funds (5%)
+                      </p>
+                      <p className="flex text-base leading-snug w-full tracking-wide text-gray-900 text-opacity-100">
+                        • Instant Reveal <br />
+                      </p>
+                      <p className="text-base leading-snug w-full tracking-wide text-gray-900 text-opacity-100">
+                        • Marketing
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
