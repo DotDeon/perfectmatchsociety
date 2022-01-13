@@ -1,8 +1,8 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import logo from '../assets/PFP.svg';
-import icon from '../assets/icon.png';
-import strip from '../assets/stroke.png';
+import Head from "next/head";
+import Image from "next/image";
+import logo from "../assets/PFP.svg";
+import icon from "../assets/icon.png";
+import strip from "../assets/stroke.png";
 
 export default function Home() {
   return (
@@ -42,7 +42,7 @@ export default function Home() {
           <div className="hidden md:flex items-center space-x-10 justify-start text-white">
             <p
               className={
-                'hidden md:inline-flex text-lg font-bold cursor-pointer hover:text-green text-black'
+                "hidden md:inline-flex text-lg font-bold cursor-pointer hover:text-green text-black"
               }
               // onClick={() => setScroll(1)}
             >
@@ -52,7 +52,7 @@ export default function Home() {
             {/* <Link href={{ pathname: '/new' }} onClick={setScroll(1)}> */}
             <p
               className={
-                'hidden md:inline-flex text-lg font-bold cursor-pointer hover:text-green text-black'
+                "hidden md:inline-flex text-lg font-bold cursor-pointer hover:text-green text-black"
               }
               // onClick={() => setScroll(5)}
             >
@@ -62,7 +62,7 @@ export default function Home() {
           <Link href={{ pathname: '/' }} onClick={setScroll(2)}> */}
             <p
               className={
-                'hidden md:inline-flex text-lg font-bold cursor-pointer hover:text-green text-black'
+                "hidden md:inline-flex text-lg font-bold cursor-pointer hover:text-green text-black"
               }
               // onClick={() => setScroll(2)}
             >
@@ -140,19 +140,19 @@ export default function Home() {
             <p className=" text-2xl md:text-6xl font-bold mt-5 2xl:text-9xl text-center md:text-left">
               Welcome to the Perfect Match Society!
             </p>
-            <p className="text-xl md:text-3xl font-bold mt-12 md:mr-16 text-center md:text-left">
+            <p className="md:text-xl font-bold mt-6 md:mr-16 text-center md:text-left">
               Welcome to the Perfect Match Society. A collection of 10,000 PMS
               living on the Ethereum Blockchain and inspired by Doodles x Cool
               Cats x WGMInterface. They are randomly generated and composed of a
               variety of hand-drawn traits
             </p>
-            <div className="mt-10 flex flex-col md:flex-row justify-center items-center">
+            <div className="mt-10 flex flex-col md:flex-row justify-center md:justify-start  items-center">
               <a className=" bg-black px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg rounded-full text-white font-bold hover:bg-green hover:text-purple text-center">
-                {' '}
+                {" "}
                 MINT 0.01 ETH
               </a>
               <a className="text-black font-bold text-lg md:ml-12 2xl:text-3xl">
-                {' '}
+                {" "}
                 10,000/ 10,000 left
               </a>
             </div>
@@ -201,11 +201,11 @@ export default function Home() {
                   </div>
                   <div className="order-1 ml-10 mt-8">
                     <div className="flex flex-row">
-                      <h3 className="mb-3 font-bold underline  text-xl  md:text-4xl">
+                      <h3 className="mb-3 font-bold underline  text-xl  md:text-3xl">
                         Pre-Launch / Mint Phase
                       </h3>
                     </div>
-                    <ul className="list-disc md:text-xl ">
+                    <ul className="list-disc md:text-lg ">
                       <li>Building the Perfect Match Society</li>
                       <li>Sneak Peeks</li>
                       <li>Whitelisting</li>
@@ -216,22 +216,22 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="mb-10 top-0 flex justify-start items-start w-full">
+                <div className="  top-0 flex justify-start items-start w-full">
                   <div className="order-2 w-12/12"></div>
                   <div className="z-20">
                     <div className="h-7 w-7 bg-black rounded-full"></div>
                   </div>
                   <div className="order-1 ml-10 -mt-2 ">
                     <div className="flex flex-row">
-                      <h3 className="mb-3 font-bold underline   text-xl  md:text-4xl">
+                      <h3 className="mb-3 font-bold underline   text-xl  md:text-3xl">
                         Post Launch Phase
                       </h3>
                     </div>
                     <div className="flex flex-col justify-center items-center ">
-                      <ul className="list-disc md:text-xl ">
+                      <ul className="list-disc md:text-lg ">
                         <li>Reward our community </li>
                         <li>
-                          Sweep Floors (Perfect Match and other projects...){' '}
+                          Sweep Floors (Perfect Match and other projects...){" "}
                         </li>
                         <li>Society Bank (Community Funds) </li>
                         <li>5% Royalties to Society Bank </li>
@@ -245,16 +245,16 @@ export default function Home() {
                 <div className="mb-8 top-0 flex justify-start items-start w-full mt-2 md:mt-2">
                   <div className="order-2 w-12/12"></div>
                   <div className="z-20">
-                    <div className="h-7 w-7 bg-black rounded-full mt-8"></div>
+                    <div className="h-7 w-7 bg-black rounded-full mt-12"></div>
                   </div>
                   <div className="order-1 ml-10 -mt-4 md:mt-2 ">
                     <div className="flex flex-row">
-                      <h3 className="mb-3 font-bold underline  text-xl  md:text-4xl">
+                      <h3 className="mb-3 font-bold underline  text-xl  md:text-3xl">
                         Third Phase (Roadmap Part II)
                       </h3>
                     </div>
                     <div className="flex flex-col justify-center items-left">
-                      <ul className="list-disc md:text-xl ">
+                      <ul className="list-disc md:text-lg ">
                         <li>New marketing plans</li>
                         <li>Hire new talents in the team</li>
                         <li>Merch for the community</li>
@@ -288,7 +288,7 @@ export default function Home() {
                   name="tabs"
                 />
                 <label
-                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-4xl"
+                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-2xl"
                   htmlFor="tab-multi-one"
                 >
                   1. How many PMS are there?
@@ -312,7 +312,7 @@ export default function Home() {
                   name="tabs"
                 />
                 <label
-                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-4xl"
+                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-2xl"
                   htmlFor="tab-multi-two"
                 >
                   2. How much will it cost?
@@ -336,7 +336,7 @@ export default function Home() {
                   name="tabs"
                 />
                 <label
-                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-4xl"
+                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-2xl"
                   htmlFor="tab-multi-three"
                 >
                   3. Wen reveal?
@@ -360,7 +360,7 @@ export default function Home() {
                   name="tabs"
                 />
                 <label
-                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-4xl"
+                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-2xl"
                   htmlFor="tab-multi-four"
                 >
                   4. When is launch?
@@ -382,7 +382,7 @@ export default function Home() {
                   name="tabs"
                 />
                 <label
-                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-4xl"
+                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-2xl"
                   htmlFor="tab-multi-five"
                 >
                   5. How do I purchase a PMS?
@@ -406,7 +406,7 @@ export default function Home() {
                   name="tabs"
                 />
                 <label
-                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-4xl"
+                  className="block p-5 leading-normal cursor-pointer text-black font-bold text-xl md:text-2xl"
                   htmlFor="tab-multi-six"
                 >
                   6. Are some PMS more rare than others?
