@@ -181,10 +181,7 @@ export default function Home() {
         </div>
         {/* Banner */}
         {/* Strip */}
-        {/* <div className="h-32 bg-green mt-10"> */}
         <Image src={strip} objectFit="fill" />
-        {/* <Image src={strip} layout="responsive" objectFit="fill" /> */}
-        {/* </div> */}
         {/* Strip */}
         {/* Roadmap */}
         <div className="flex flex-col items-center mt-20 min-w-screen">
@@ -192,7 +189,7 @@ export default function Home() {
           <div className=" bg-pink border-8 rounded-3xl border-white mt-6 2xl:px-20 pb-4 hover:bg-gray-100 hover:scale-105 transision transform duration-200 ease-out">
             <div className="container bg-gray-200 mx-auto w-full h-full">
               <div className="relative wrap overflow-hidden pt-10 px-10 h-full">
-                <div className=" border-2-2 mt-14 absolute border-dashed border-2 border-black h-4/6 ml-3"></div>
+                <div className=" border-2-2 mt-14 absolute border-dashed border-2 border-black h- ml-3"></div>
 
                 <div className="mb-8 top-0 flex justify-start items-center w-full">
                   <div className="order-2 w-12/12"></div>
@@ -247,7 +244,7 @@ export default function Home() {
                   <div className="z-20">
                     <div className="h-7 w-7 bg-black rounded-full mt-12"></div>
                   </div>
-                  <div className="order-1 ml-10 -mt-4 md:mt-2 ">
+                  <div className="order-1 ml-10 -mt-4 md:mt-8 ">
                     <div className="flex flex-row">
                       <h3 className="mb-3 font-bold underline  text-xl  md:text-3xl">
                         Third Phase (Roadmap Part II)
