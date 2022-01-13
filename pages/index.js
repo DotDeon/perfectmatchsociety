@@ -137,7 +137,7 @@ export default function Home() {
         {/* Banner */}
         <div className="grid grid-cols-2 md:grid-cols-3 md:px-14 2xl:px-36 pt-20 justify-center items-center mb-20 2xl:mb-48">
           <div className="col-span-2 mx-14 items-center 2xl-ml-10">
-            <p className=" text-2xl md:text-6xl font-bold mt-5 2xl:text-9xl text-center md:text-left">
+            <p className=" text-2xl md:text-4xl lg:text-5xl font-bold mt-5 2xl:text-7xl text-center md:text-left">
               Welcome to the Perfect Match Society!
             </p>
             <p className="md:text-xl font-bold mt-6 md:mr-16 text-center md:text-left">
@@ -340,7 +340,7 @@ export default function Home() {
                 </label>
                 <div className="tab-content overflow-hidden   leading-normal">
                   <p className="p-5 text-black text-lg">
-                    PMS will be INSTANT reveal on mint
+                    PMS will be revealed once it's sold out
                   </p>
                 </div>
               </div>
@@ -363,7 +363,10 @@ export default function Home() {
                   4. When is launch?
                 </label>
                 <div className="tab-content overflow-hidden   leading-normal">
-                  <p className="p-5 text-black text-lg">15 January 2022</p>
+                  <p className="p-5 text-black text-lg">
+                    15 January 2022 (Whitelist) <br /> 16 January 2022 (Public
+                    Mint)
+                  </p>
                 </div>
               </div>
             </div>
@@ -386,7 +389,7 @@ export default function Home() {
                 </label>
                 <div className="tab-content overflow-hidden   leading-normal">
                   <p className="p-5 text-black text-lg">
-                    You cant mint from our website or buy directly from OpenSea
+                    You can mint from our website or buy directly from OpenSea
                   </p>
                 </div>
               </div>
