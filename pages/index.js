@@ -3,8 +3,135 @@ import Image from "next/image";
 import logo from "../assets/PFP.svg";
 import icon from "../assets/icon.png";
 import strip from "../assets/stroke.png";
+import animateScrollTo from "animated-scroll-to";
+import { useDispatch, useSelector } from "react-redux";
+import { connect } from "../src/redux/blockchain/blockchainActions";
+import { fetchData } from "../src/redux/data/dataActions";
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const blockchain = useSelector((state) => state.blockchain);
+  const [nftQTY, setNFTQty] = useState(1);
+  const [mintMSG, setMintMsg] = useState("MINT 0.01 ETH");
+  const claimNFT = (_amount) => {
+    blockchain.smartContract.methods
+      .isWhitelisted(blockchain.account)
+      .call()
+      .then(function (whitelisted) {
+        var isWhitelisted = whitelisted;
+
+        if (isWhitelisted === true) {
+          var value = "0.001";
+          setMintMsg("Busy");
+
+          blockchain.smartContract.methods
+            .mint(nftQTY)
+            .send({
+              from: blockchain.account,
+
+              value: blockchain.web3.utils.toWei(
+                (value * nftQTY).toString(),
+                "ether"
+              ),
+            })
+            .once("error", (err) => {
+              setMintMsg("MINT 0.01 ETH");
+            })
+            .then((receipt) => {
+              setMintMsg("MINT 0.01 ETH");
+
+              createNFTs();
+
+              setFeedback("Success");
+            });
+        } else {
+          blockchain.smartContract.methods
+            .onlyWhitelisted()
+            .call()
+            .then(function (onlyWhitelist) {
+              if (onlyWhitelist === true) {
+                setMintMsg("Minting has not started");
+              } else {
+                var value = "0.001";
+                setMintMsg("Busy");
+
+                blockchain.smartContract.methods
+                  .mint(nftQTY)
+                  .send({
+                    from: blockchain.account,
+
+                    value: blockchain.web3.utils.toWei(
+                      (value * nftQTY).toString(),
+                      "ether"
+                    ),
+                  })
+                  .once("error", (err) => {
+                    setMintMsg("Mint");
+                  })
+                  .then((receipt) => {
+                    //   setClaimingNFT(false);
+                    setMintMsg("Mint");
+
+                    createNFTs();
+                    //setFeedback("Success");
+                  });
+              }
+            });
+        }
+      });
+  };
+
+  useEffect(() => {
+    if (blockchain.account !== "" && blockchain.smartContract !== null) {
+      dispatch(fetchData(blockchain.account));
+
+      blockchain.smartContract.methods
+        .onlyWhitelisted()
+        .call()
+        .then(function (onlyWhitelist) {
+          if (onlyWhitelist === true) {
+            var isWhitelisted;
+            blockchain.smartContract.methods
+              .isWhitelisted(blockchain.account)
+              .call()
+              .then(function (whitelisted) {
+                var isWhitelisted = whitelisted;
+
+                if (isWhitelisted === true) {
+                  blockchain.smartContract.methods
+                    .isVIP(blockchain.account)
+                    .call()
+                    .then(function (VIP) {
+                      if (VIP === true) {
+                        blockchain.smartContract.methods
+                          .qtyLeftForVIP(blockchain.account)
+                          .call()
+                          .then(function (mintNUM) {
+                            setQtyLeft(mintNUM);
+                          });
+                      } else {
+                        blockchain.smartContract.methods
+                          .qtyLeftForUser(blockchain.account)
+                          .call()
+                          .then(function (mintNUM) {
+                            setQtyLeft(mintNUM);
+                          });
+                      }
+                    });
+                }
+              });
+          } else {
+            blockchain.smartContract.methods
+              .qtyLeftForUser(blockchain.account)
+              .call()
+              .then(function (mintNUM) {
+                setQtyLeft(mintNUM);
+              });
+          }
+        });
+    }
+  }, [blockchain.smartContract, dispatch]);
+
   return (
     <div>
       <Head>
@@ -44,7 +171,7 @@ export default function Home() {
               className={
                 "hidden md:inline-flex text-lg font-bold cursor-pointer hover:text-green text-black"
               }
-              // onClick={() => setScroll(1)}
+              onClick={() => animateScrollTo(document.querySelector(".mint"))}
             >
               Mint
             </p>
@@ -54,7 +181,9 @@ export default function Home() {
               className={
                 "hidden md:inline-flex text-lg font-bold cursor-pointer hover:text-green text-black"
               }
-              // onClick={() => setScroll(5)}
+              onClick={() =>
+                animateScrollTo(document.querySelector(".roadmap"))
+              }
             >
               Roadmap
             </p>
@@ -64,7 +193,7 @@ export default function Home() {
               className={
                 "hidden md:inline-flex text-lg font-bold cursor-pointer hover:text-green text-black"
               }
-              // onClick={() => setScroll(2)}
+              onClick={() => animateScrollTo(document.querySelector(".faq"))}
             >
               FAQ
             </p>
@@ -133,7 +262,7 @@ export default function Home() {
         </div>
       </header>
 
-      <div className=" justify-center items-center flex flex-col bg-purple min-h-screen min-w-screen">
+      <div className=" justify-center items-center flex flex-col bg-purple min-h-screen min-w-screen mint">
         {/* Banner */}
         <div className="grid grid-cols-2 md:grid-cols-3 md:px-14 2xl:px-36 pt-20 justify-center items-center mb-20 2xl:mb-48">
           <div className="col-span-2 mx-14 items-center 2xl-ml-10">
@@ -151,6 +280,29 @@ export default function Home() {
                 {" "}
                 MINT 0.01 ETH
               </a>
+              {blockchain.account === "" ||
+              blockchain.smartContract === null ? (
+                <a
+                  className=" bg-black px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg rounded-full text-white font-bold hover:bg-green hover:text-purple text-center cursor-pointer"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    dispatch(connect());
+                  }}
+                >
+                  {" "}
+                  MINT 0.01 ETH
+                </a>
+              ) : (
+                <a
+                  className=" bg-black px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg rounded-full text-white font-bold hover:bg-green hover:text-purple text-center cursor-pointer"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    claimNFT(nftQTY);
+                  }}
+                >
+                  {mintMSG}
+                </a>
+              )}
               <a className="text-black font-bold text-lg md:ml-12 2xl:text-3xl">
                 {" "}
                 10,000/ 10,000 left
@@ -181,11 +333,13 @@ export default function Home() {
         </div>
         {/* Banner */}
         {/* Strip */}
+
         <Image src={strip} objectFit="fill" />
+        <div className="roadmap"></div>
         {/* Strip */}
         {/* Roadmap */}
-        <div className="flex flex-col items-center mt-20 min-w-screen">
-          <p className=" text-6xl font-bold mt-5">Roadmap</p>
+        <div className="flex flex-col items-center mt-20 min-w-screen ">
+          <p className=" text-6xl font-bold mt-5 ">Roadmap</p>
           <div className=" bg-pink border-8 rounded-3xl border-white mt-6 2xl:px-20 pb-4 hover:bg-gray-100 hover:scale-105 transision transform duration-200 ease-out">
             <div className="container bg-gray-200 mx-auto w-full h-full">
               <div className="relative wrap overflow-hidden pt-10 px-10 h-full">
@@ -271,7 +425,7 @@ export default function Home() {
         {/* Roadmap */}
 
         {/* FAQs */}
-        <div className="flex relative flex-col items-center min-w-screen mb-10 mt-10">
+        <div className="flex relative flex-col items-center min-w-screen mb-10 mt-10 faq">
           {/* <h1 className="text-white font-angkor text-4xl mt-16">FAQs</h1> */}
           <p className=" text-6xl font-bold mt-5">FAQs</p>
           <div className="flex min-w-screen relative flex-col py-10">
