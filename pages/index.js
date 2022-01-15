@@ -72,7 +72,7 @@ export default function Home() {
                     //   setClaimingNFT(false);
                     setMintMsg('Mint');
 
-                    createNFTs();
+                    // createNFTs();
                     //setFeedback("Success");
                   });
               }
@@ -278,14 +278,10 @@ export default function Home() {
               variety of hand-drawn traits
             </p>
             <div className="mt-10 flex flex-col md:flex-row justify-center md:justify-start  items-center">
-              {/* <a className=" bg-black px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg rounded-full text-white font-bold hover:bg-green hover:text-purple text-center">
-                {' '}
-                MINT 0.01 ETH
-              </a> */}
               {blockchain.account === '' ||
               blockchain.smartContract === null ? (
                 <a
-                  className=" bg-blue px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg rounded-full text-white font-bold hover:bg-green hover:text-purple text-center cursor-pointer"
+                  className=" bg-blue px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg rounded-full text-black font-bold hover:bg-black hover:text-purple text-center cursor-pointer"
                   onClick={(e) => {
                     e.preventDefault();
                     dispatch(connect());
@@ -328,8 +324,8 @@ export default function Home() {
                 src={icon}
                 layout="fixed"
                 objectFit="contain"
-                width={350}
-                height={350}
+                width={300}
+                height={300}
                 className="bg-green rounded-3xl hover:bg-yellow"
               />
             </div>
@@ -521,10 +517,7 @@ export default function Home() {
                   4. When is launch?
                 </label>
                 <div className="tab-content overflow-hidden   leading-normal">
-                  <p className="p-5 text-black text-lg">
-                    15 January 2022 (Whitelist) <br /> 16 January 2022 (Public
-                    Mint)
-                  </p>
+                  <p className="p-5 text-black text-lg">TBD</p>
                 </div>
               </div>
             </div>
