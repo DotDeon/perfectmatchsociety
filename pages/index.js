@@ -1,18 +1,21 @@
-import Head from "next/head";
-import Image from "next/image";
-import logo from "../assets/PFP.svg";
-import icon from "../assets/icon.png";
-import strip from "../assets/stroke.png";
-import animateScrollTo from "animated-scroll-to";
-import { useDispatch, useSelector } from "react-redux";
-import { connect } from "../src/redux/blockchain/blockchainActions";
-import { fetchData } from "../src/redux/data/dataActions";
+import Head from 'next/head';
+import Image from 'next/image';
+import logo from '../assets/PFP.svg';
+import icon from '../assets/icon.png';
+import strip from '../assets/stroke.png';
+import animateScrollTo from 'animated-scroll-to';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { connect } from '../src/redux/blockchain/blockchainActions';
+
+//'../src/redux/blockchain/blockchainActions';
+import { fetchData } from '../src/redux/data/dataActions';
 
 export default function Home() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const [nftQTY, setNFTQty] = useState(1);
-  const [mintMSG, setMintMsg] = useState("MINT 0.01 ETH");
+  const [mintMSG, setMintMsg] = useState('MINT 0.01 ETH');
   const claimNFT = (_amount) => {
     blockchain.smartContract.methods
       .isWhitelisted(blockchain.account)
@@ -21,28 +24,25 @@ export default function Home() {
         var isWhitelisted = whitelisted;
 
         if (isWhitelisted === true) {
-          var value = "0.001";
-          setMintMsg("Busy");
+          var value = '0.001';
+          setMintMsg('Busy');
 
           blockchain.smartContract.methods
             .mint(nftQTY)
             .send({
               from: blockchain.account,
 
-              value: blockchain.web3.utils.toWei(
-                (value * nftQTY).toString(),
-                "ether"
-              ),
+              value: blockchain.web3.utils.toWei('0.01'.toString(), 'ether'),
             })
-            .once("error", (err) => {
-              setMintMsg("MINT 0.01 ETH");
+            .once('error', (err) => {
+              setMintMsg('MINT 0.01 ETH');
             })
             .then((receipt) => {
-              setMintMsg("MINT 0.01 ETH");
+              setMintMsg('MINT 0.01 ETH');
 
-              createNFTs();
+              // createNFTs();
 
-              setFeedback("Success");
+              setFeedback('Success');
             });
         } else {
           blockchain.smartContract.methods
@@ -50,10 +50,10 @@ export default function Home() {
             .call()
             .then(function (onlyWhitelist) {
               if (onlyWhitelist === true) {
-                setMintMsg("Minting has not started");
+                setMintMsg('Minting has not started');
               } else {
-                var value = "0.001";
-                setMintMsg("Busy");
+                var value = '0.001';
+                setMintMsg('Busy');
 
                 blockchain.smartContract.methods
                   .mint(nftQTY)
@@ -61,16 +61,16 @@ export default function Home() {
                     from: blockchain.account,
 
                     value: blockchain.web3.utils.toWei(
-                      (value * nftQTY).toString(),
-                      "ether"
+                      '0.01'.toString(),
+                      'ether'
                     ),
                   })
-                  .once("error", (err) => {
-                    setMintMsg("Mint");
+                  .once('error', (err) => {
+                    setMintMsg('Mint');
                   })
                   .then((receipt) => {
                     //   setClaimingNFT(false);
-                    setMintMsg("Mint");
+                    setMintMsg('Mint');
 
                     createNFTs();
                     //setFeedback("Success");
@@ -82,7 +82,9 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (blockchain.account !== "" && blockchain.smartContract !== null) {
+    console.log(blockchain.account);
+    console.log(blockchain.smartContract);
+    if (blockchain.account !== '' && blockchain.smartContract !== null) {
       dispatch(fetchData(blockchain.account));
 
       blockchain.smartContract.methods
@@ -169,9 +171,9 @@ export default function Home() {
           <div className="hidden md:flex items-center space-x-10 justify-start text-white">
             <p
               className={
-                "hidden md:inline-flex text-lg font-bold cursor-pointer hover:text-green text-black"
+                'hidden md:inline-flex text-lg font-bold cursor-pointer hover:text-green text-black'
               }
-              onClick={() => animateScrollTo(document.querySelector(".mint"))}
+              onClick={() => animateScrollTo(document.querySelector('.mint'))}
             >
               Mint
             </p>
@@ -179,10 +181,10 @@ export default function Home() {
             {/* <Link href={{ pathname: '/new' }} onClick={setScroll(1)}> */}
             <p
               className={
-                "hidden md:inline-flex text-lg font-bold cursor-pointer hover:text-green text-black"
+                'hidden md:inline-flex text-lg font-bold cursor-pointer hover:text-green text-black'
               }
               onClick={() =>
-                animateScrollTo(document.querySelector(".roadmap"))
+                animateScrollTo(document.querySelector('.roadmap'))
               }
             >
               Roadmap
@@ -191,9 +193,9 @@ export default function Home() {
           <Link href={{ pathname: '/' }} onClick={setScroll(2)}> */}
             <p
               className={
-                "hidden md:inline-flex text-lg font-bold cursor-pointer hover:text-green text-black"
+                'hidden md:inline-flex text-lg font-bold cursor-pointer hover:text-green text-black'
               }
-              onClick={() => animateScrollTo(document.querySelector(".faq"))}
+              onClick={() => animateScrollTo(document.querySelector('.faq'))}
             >
               FAQ
             </p>
@@ -276,21 +278,23 @@ export default function Home() {
               variety of hand-drawn traits
             </p>
             <div className="mt-10 flex flex-col md:flex-row justify-center md:justify-start  items-center">
-              <a className=" bg-black px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg rounded-full text-white font-bold hover:bg-green hover:text-purple text-center">
-                {" "}
+              {/* <a className=" bg-black px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg rounded-full text-white font-bold hover:bg-green hover:text-purple text-center">
+                {' '}
                 MINT 0.01 ETH
-              </a>
-              {blockchain.account === "" ||
+              </a> */}
+              {blockchain.account === '' ||
               blockchain.smartContract === null ? (
                 <a
-                  className=" bg-black px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg rounded-full text-white font-bold hover:bg-green hover:text-purple text-center cursor-pointer"
+                  className=" bg-blue px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg rounded-full text-white font-bold hover:bg-green hover:text-purple text-center cursor-pointer"
                   onClick={(e) => {
                     e.preventDefault();
                     dispatch(connect());
+                    console.log(blockchain.account);
+                    console.log('Mint Mint Mint');
                   }}
                 >
-                  {" "}
-                  MINT 0.01 ETH
+                  {' '}
+                  Connect Wallet
                 </a>
               ) : (
                 <a
@@ -304,7 +308,7 @@ export default function Home() {
                 </a>
               )}
               <a className="text-black font-bold text-lg md:ml-12 2xl:text-3xl">
-                {" "}
+                {' '}
                 10,000/ 10,000 left
               </a>
             </div>
@@ -382,7 +386,7 @@ export default function Home() {
                       <ul className="list-disc md:text-lg ">
                         <li>Reward our community </li>
                         <li>
-                          Sweep Floors (Perfect Match and other projects...){" "}
+                          Sweep Floors (Perfect Match and other projects...){' '}
                         </li>
                         <li>Society Bank (Community Funds) </li>
                         <li>5% Royalties to Society Bank </li>
