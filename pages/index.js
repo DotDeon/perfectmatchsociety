@@ -284,7 +284,7 @@ export default function Home() {
             </a>
             <a
               target="_blank"
-              href="https://www.discord.gg/"
+              href="https://discord.gg/C6cENea3Kd"
               rel="noopener noreferrer"
             >
               <svg
@@ -303,7 +303,7 @@ export default function Home() {
             </a>
             <a
               target="_blank"
-              href="https://twitter.com/"
+              href="https://twitter.com/PerfectMatchSct"
               rel="noopener noreferrer"
             >
               <svg
