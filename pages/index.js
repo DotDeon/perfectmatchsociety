@@ -7,6 +7,25 @@ import animateScrollTo from 'animated-scroll-to';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { connect } from '../src/redux/blockchain/blockchainActions';
+import Slider from 'react-input-slider';
+import j1 from '../assets/1.png';
+import j2 from '../assets/2.png';
+import j3 from '../assets/3.png';
+import j4 from '../assets/4.png';
+import j5 from '../assets/5.png';
+import j6 from '../assets/6.png';
+import j7 from '../assets/7.png';
+import j8 from '../assets/8.png';
+import j9 from '../assets/9.png';
+import j10 from '../assets/10.png';
+import j11 from '../assets/11.png';
+import j12 from '../assets/12.png';
+import j13 from '../assets/13.png';
+import j14 from '../assets/14.png';
+import j15 from '../assets/15.png';
+import j16 from '../assets/16.png';
+import j17 from '../assets/17.png';
+import j18 from '../assets/18.png';
 
 //'../src/redux/blockchain/blockchainActions';
 import { fetchData } from '../src/redux/data/dataActions';
@@ -15,7 +34,16 @@ export default function Home() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const [nftQTY, setNFTQty] = useState(1);
-  const [mintMSG, setMintMsg] = useState('MINT 0.01 ETH');
+  const [qtyLeft, setQtyLeft] = useState(20);
+  const [minMint, setMinMint] = useState(1);
+  const [mintMSG, setMintMsg] = useState('MINT 1');
+
+  const [launchTime, setlaunchTime] = useState(false);
+  const [days, setDays] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
   const claimNFT = (_amount) => {
     blockchain.smartContract.methods
       .isWhitelisted(blockchain.account)
@@ -24,7 +52,7 @@ export default function Home() {
         var isWhitelisted = whitelisted;
 
         if (isWhitelisted === true) {
-          var value = '0.001';
+          var value = '0.01';
           setMintMsg('Busy');
 
           blockchain.smartContract.methods
@@ -32,7 +60,10 @@ export default function Home() {
             .send({
               from: blockchain.account,
 
-              value: blockchain.web3.utils.toWei('0.01'.toString(), 'ether'),
+              value: blockchain.web3.utils.toWei(
+                (value * nftQTY).toString(),
+                'ether'
+              ),
             })
             .once('error', (err) => {
               setMintMsg('MINT 0.01 ETH');
@@ -52,7 +83,7 @@ export default function Home() {
               if (onlyWhitelist === true) {
                 setMintMsg('Minting has not started');
               } else {
-                var value = '0.001';
+                var value = '0.01';
                 setMintMsg('Busy');
 
                 blockchain.smartContract.methods
@@ -61,7 +92,7 @@ export default function Home() {
                     from: blockchain.account,
 
                     value: blockchain.web3.utils.toWei(
-                      '0.01'.toString(),
+                      (value * nftQTY).toString(),
                       'ether'
                     ),
                   })
@@ -133,6 +164,35 @@ export default function Home() {
         });
     }
   }, [blockchain.smartContract, dispatch]);
+
+  useEffect(() => {
+    const target = new Date('2022-01-19T23:00:00.000+01:00');
+
+    const interval = setInterval(() => {
+      const now = new Date();
+      const difference = target.getTime() - now.getTime();
+
+      const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+      setDays(d);
+
+      const h = Math.floor(
+        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      setHours(h);
+
+      const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      setMinutes(m);
+
+      const s = Math.floor((difference % (1000 * 60)) / 1000);
+      setSeconds(s);
+
+      if (d <= 0 && h <= 0 && m <= 0 && s <= 0) {
+        setlaunchTime(true);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div>
@@ -277,37 +337,108 @@ export default function Home() {
               Cats x WGMInterface. They are randomly generated and composed of a
               variety of hand-drawn traits
             </p>
-            <div className="mt-10 flex flex-col md:flex-row justify-center md:justify-start  items-center">
-              {blockchain.account === '' ||
-              blockchain.smartContract === null ? (
-                <a
-                  className=" bg-blue px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg rounded-full text-black font-bold hover:bg-black hover:text-purple text-center cursor-pointer"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    dispatch(connect());
-                    console.log(blockchain.account);
-                    console.log('Mint Mint Mint');
-                  }}
-                >
-                  {' '}
-                  Connect Wallet
-                </a>
-              ) : (
-                <a
-                  className=" bg-black px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg rounded-full text-white font-bold hover:bg-green hover:text-purple text-center cursor-pointer"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    claimNFT(nftQTY);
-                  }}
-                >
-                  {mintMSG}
-                </a>
-              )}
-              <a className="text-black font-bold text-lg md:ml-12 2xl:text-3xl">
-                {' '}
-                10,000/ 10,000 left
-              </a>
-            </div>
+            {launchTime ? (
+              <div className=" flex flex-col items-start justify-center mt-12">
+                <div className="flex flex-row justify-center ml-24">
+                  <p className="text-black text-center text-lg ">
+                    {' '}
+                    {(parseFloat(0.01) * nftQTY).toString()} ETH
+                  </p>
+                </div>
+
+                <div className="flex flex-row justify-start">
+                  <p className="mr-4 font-bold text-black">1</p>
+                  <Slider
+                    styles={{
+                      track: {
+                        backgroundColor: '#000000',
+                      },
+                      active: {
+                        backgroundColor: '#ffd0e6',
+                      },
+                    }}
+                    axis="x"
+                    className="mt-2"
+                    xmax={qtyLeft}
+                    xmin={minMint}
+                    x={nftQTY}
+                    onChange={({ x }) => {
+                      if (mintMSG.substr(0, 4) == 'MINT') {
+                        setNFTQty(x);
+                        setMintMsg('MINT' + ' ' + x);
+                      }
+                    }}
+                  />
+                  <p className="ml-4 font-bold text-black">{qtyLeft}</p>
+                </div>
+                <div className="mt-4 flex flex-row items-center space-x-14">
+                  {blockchain.account === '' ||
+                  blockchain.smartContract === null ? (
+                    <a
+                      className=" bg-blue px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg border-2 border-black rounded-full text-black font-bold hover:bg-black hover:text-purple text-center cursor-pointer"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        dispatch(connect());
+                      }}
+                    >
+                      {' '}
+                      Connect Wallet
+                    </a>
+                  ) : (
+                    <a
+                      className=" bg-black px-7  md:px-12 py-4 2xl:py-6 2xl:px-24 2xl:text-lg rounded-full text-white font-bold hover:bg-green hover:text-purple text-center cursor-pointer"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        claimNFT(nftQTY);
+                      }}
+                    >
+                      {mintMSG}
+                    </a>
+                  )}
+                  <a className="text-black font-bold text-2xl mt-4 text-center ">
+                    {' '}
+                    10,000/ 10,000 left
+                  </a>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-row justify-start mt-12">
+                <div className="flex flex-row bg-blue px-4 rounded-3xl">
+                  <div className="flex flex-col mr-2 md:mr-4  w-24 md:w-32 h-24 md:h-32 items-center justify-center rounded-full">
+                    <span className="text-white text-3xl md:text-5xl font-Raleway font-extrabold">
+                      {days}
+                    </span>
+                    <span className="text-white text-xs md:text-base font-Raleway ">
+                      DAYS
+                    </span>
+                  </div>
+                  <div className="flex flex-col mr-2 md:mr-4  w-24 md:w-32 h-24 md:h-32 items-center justify-center rounded-full">
+                    <span className="text-white text-3xl md:text-5xl font-Raleway font-extrabold">
+                      {hours}
+                    </span>
+                    <span className="text-white text-xs md:text-base font-Raleway ">
+                      HOURS
+                    </span>
+                  </div>
+                  <div className="flex flex-col mr-2 md:mr-4  w-24 md:w-32 h-24 md:h-32 items-center justify-center rounded-full">
+                    <span className="text-white text-3xl md:text-5xl font-Raleway font-extrabold">
+                      {minutes}
+                    </span>
+                    <span className="text-white text-xs md:text-base font-Raleway ">
+                      MINUTES
+                    </span>
+                  </div>
+                  <div className="flex flex-col mr-2 md:mr-4  w-24 md:w-32 h-24 md:h-32 items-center justify-center rounded-full">
+                    <span className="text-white text-3xl md:text-5xl font-Raleway font-extrabold">
+                      {seconds}
+                    </span>
+                    <span className="text-white text-xs md:text-base font-Raleway ">
+                      SECONDS
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <div className="hidden md:flex  flex-row md:items-start  items-center">
             <Image
@@ -318,8 +449,8 @@ export default function Home() {
               className="bg-green rounded-3xl hover:bg-yellow"
             />
           </div>
-          <div className="flex mx-auto flex-row justify-center items-center ml-10 mt-10">
-            <div className="md:hidden flex  flex-row md:items-start  items-center">
+          <div className="flex mx-auto flex-row justify-center items-center ">
+            <div className="md:hidden flex  flex-row md:items-start  items-center pl-24 mt-8">
               <Image
                 src={icon}
                 layout="fixed"
@@ -333,8 +464,27 @@ export default function Home() {
         </div>
         {/* Banner */}
         {/* Strip */}
-
-        <Image src={strip} objectFit="fill" />
+        <div className="grid grid-cols-2 md:grid-cols-9">
+          <Image src={j1} objectFit="fill" />
+          <Image src={j2} objectFit="fill" />
+          <Image src={j3} objectFit="fill" />
+          <Image src={j4} objectFit="fill" />
+          <Image src={j5} objectFit="fill" />
+          <Image src={j6} objectFit="fill" />
+          <Image src={j7} objectFit="fill" />
+          <Image src={j8} objectFit="fill" />
+          <Image src={j9} objectFit="fill" />
+          <Image src={j10} objectFit="fill" />
+          <Image src={j11} objectFit="fill" />
+          <Image src={j12} objectFit="fill" />
+          <Image src={j13} objectFit="fill" />
+          <Image src={j14} objectFit="fill" />
+          <Image src={j15} objectFit="fill" />
+          <Image src={j16} objectFit="fill" />
+          <Image src={j17} objectFit="fill" />
+          <Image src={j18} objectFit="fill" />
+        </div>
+        {/* <Image src={strip} objectFit="fill" /> */}
         <div className="roadmap"></div>
         {/* Strip */}
         {/* Roadmap */}
@@ -517,7 +667,10 @@ export default function Home() {
                   4. When is launch?
                 </label>
                 <div className="tab-content overflow-hidden   leading-normal">
-                  <p className="p-5 text-black text-lg">TBD</p>
+                  <p className="p-5 text-black text-lg">
+                    Whitelist Mint: Wednesday 19/01/2022 at 11:00pm CET <br />
+                    Public Mint: Thursday 20/01/2022 at 11:00pm CET
+                  </p>
                 </div>
               </div>
             </div>
