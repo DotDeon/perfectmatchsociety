@@ -478,11 +478,11 @@ export default function Home() {
           <Image src={j11} objectFit="fill" />
           <Image src={j12} objectFit="fill" />
           <Image src={j13} objectFit="fill" />
-          <Image src={j14} objectFit="fill" />
+          <Image src={j18} objectFit="fill" />
           <Image src={j15} objectFit="fill" />
           <Image src={j16} objectFit="fill" />
           <Image src={j17} objectFit="fill" />
-          <Image src={j18} objectFit="fill" />
+          <Image src={j14} objectFit="fill" />
         </div>
         {/* <Image src={strip} objectFit="fill" /> */}
         <div className="roadmap"></div>
