@@ -11,17 +11,19 @@ contract SmartContract is ERC721Enumerable, Ownable {
     string public baseURI;
     string public baseExtension = ".json";
     string public notRevealedUri;
-    uint256 public cost = 0.069 ether;
-    uint256 public maxSupply = 9999;
+    uint256 public cost = 0.001 ether;
+    uint256 public maxSupply = 10000;
     uint256 public maxMintAmount = 20;
     uint256 public nftPerAddressLimit = 20;
     bool public paused = false;
     bool public revealed = false;
     bool public onlyWhitelisted = true;
     address[] public whitelistedAddresses;
-    address[] public vipAddresses;
-    uint256[] public vipMaxMinted;
     mapping(address => uint256) public addressMintedBalance;
+
+     //Add your address in the brakcets 
+     address payable commissions = payable( "ETH ADDRESS WITHOUT QUOTES" );
+ 
 
     constructor(
         string memory _name,
@@ -58,16 +60,9 @@ contract SmartContract is ERC721Enumerable, Ownable {
                     "max NFT per address exceeded"
                 );
             }
-            if (isVIP(msg.sender)) {
-                uint256 vipMintAmount1 = vipMintAmount(msg.sender);
-                uint256 ownerMintedCount = addressMintedBalance[msg.sender];
-                require(
-                    ownerMintedCount + _mintAmount <= vipMintAmount1,
-                    "max NFT per address exceeded"
-                );
-            } else {
+
                 require(msg.value >= cost * _mintAmount, "insufficient funds");
-            }
+           
         }
 
         for (uint256 i = 1; i <= _mintAmount; i++) {
@@ -76,13 +71,6 @@ contract SmartContract is ERC721Enumerable, Ownable {
         }
     }
 
-    function qtyLeftForVIP(address _user) public view returns (uint256) {
-        // uint256 supply = totalSupply();
-        uint256 ownerMintedCount = addressMintedBalance[_user];
-        uint256 vipMintAmount1 = vipMintAmount(_user);
-        uint256 allowed = (vipMintAmount1 - ownerMintedCount);
-        return allowed;
-    }
 
     function qtyLeftForUser(address _user) public view returns (uint256) {
         // uint256 supply = totalSupply();
@@ -97,30 +85,8 @@ contract SmartContract is ERC721Enumerable, Ownable {
                 return true;
             }
         }
-        for (uint256 i = 0; i < vipAddresses.length; i++) {
-            if (vipAddresses[i] == _user) {
-                return true;
-            }
-        }
+  
         return false;
-    }
-
-    function isVIP(address _user) public view returns (bool) {
-        for (uint256 i = 0; i < vipAddresses.length; i++) {
-            if (vipAddresses[i] == _user) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    function vipMintAmount(address _user) public view returns (uint256) {
-        for (uint256 i = 0; i < vipAddresses.length; i++) {
-            if (vipAddresses[i] == _user) {
-                return vipMaxMinted[i];
-            }
-        }
-        return 0;
     }
 
     function walletOfOwner(address _owner)
@@ -210,18 +176,7 @@ contract SmartContract is ERC721Enumerable, Ownable {
         whitelistedAddresses = _users;
     }
 
-    function vipUsers(address[] calldata _users) public onlyOwner {
-        delete vipAddresses;
-        vipAddresses = _users;
-    }
 
-    function vipUsersMaxMint(uint256[] calldata _numberofmints)
-        public
-        onlyOwner
-    {
-        delete vipMaxMinted;
-        vipMaxMinted = _numberofmints;
-    }
 
     function withdraw() public payable onlyOwner {
         (bool success, ) = payable(msg.sender).call{

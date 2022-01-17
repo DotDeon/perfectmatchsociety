@@ -402,9 +402,9 @@ export default function Home() {
                 </div>
               </div>
             ) : (
-              <div className="flex flex-row justify-start mt-12">
-                <div className="flex flex-row bg-blue px-4 rounded-3xl">
-                  <div className="flex flex-col mr-2 md:mr-4  w-24 md:w-32 h-24 md:h-32 items-center justify-center rounded-full">
+              <div className="flex flex-row justify-center md:justify-start mt-12">
+                <div className="flex flex-row justify-center bg-blue px-4 rounded-3xl">
+                  <div className="flex flex-col mr-2 md:mr-4  w-20 md:w-32 h-24 md:h-32 items-center justify-center rounded-full">
                     <span className="text-black text-3xl md:text-5xl font-Raleway font-extrabold">
                       {days}
                     </span>
