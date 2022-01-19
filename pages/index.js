@@ -707,35 +707,35 @@ export default function Home() {
         return false;
       }
     });
-    if (matches) {
-      var value = '0.01';
-      setMintMsg('Busy');
+    // if (matches) {
+    //   var value = '0.01';
+    //   setMintMsg('Busy');
 
-      blockchain.smartContract.methods
-        .mint(nftQTY)
-        .send({
-          from: blockchain.account,
+    //   blockchain.smartContract.methods
+    //     .mint(nftQTY)
+    //     .send({
+    //       from: blockchain.account,
 
-          value: blockchain.web3.utils.toWei(
-            (value * nftQTY).toString(),
-            'ether'
-          ),
-        })
-        .once('error', (err) => {
-          setMintMsg('Mint');
-        })
-        .then((receipt) => {
-          //   setClaimingNFT(false);
-          setMintMsg('Mint');
+    //       value: blockchain.web3.utils.toWei(
+    //         (value * nftQTY).toString(),
+    //         'ether'
+    //       ),
+    //     })
+    //     .once('error', (err) => {
+    //       setMintMsg('Mint');
+    //     })
+    //     .then((receipt) => {
+    //       //   setClaimingNFT(false);
+    //       setMintMsg('Mint');
 
-          // createNFTs();
-          //setFeedback("Success");
-        });
-    } else {
-      // console.log('cant mint');
-      setMintMsg('Not Whitelisted');
-      // console.log(blockchain.account);
-    }
+    //       // createNFTs();
+    //       //setFeedback("Success");
+    //     });
+    // } else {
+    // console.log('cant mint');
+    setMintMsg('Not Whitelisted');
+    // console.log(blockchain.account);
+    // }
     // blockchain.smartContract.methods
     //   .isWhitelisted(blockchain.account)
     //   .call()
