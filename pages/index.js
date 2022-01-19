@@ -955,7 +955,7 @@ export default function Home() {
           <div className="flex relative flex-row space-x-4 md:space-x-8">
             <a
               target="_blank"
-              href="https://opensea.io"
+              href="https://opensea.io/collection/perfect-match-society"
               rel="noopener noreferrer"
               className=" p-2 bg-black rounded-full hover:bg-green"
             >
