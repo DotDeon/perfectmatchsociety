@@ -857,7 +857,7 @@ export default function Home() {
   }, [blockchain.smartContract, dispatch]);
 
   useEffect(() => {
-    const target = new Date('2022-01-19T23:00:00.000+01:00');
+    const target = new Date('2022-01-20T23:00:00.000+01:00');
 
     const interval = setInterval(() => {
       const now = new Date();
@@ -955,7 +955,7 @@ export default function Home() {
           <div className="flex relative flex-row space-x-4 md:space-x-8">
             <a
               target="_blank"
-              href="https://opensea.io/collection/perfect-match-society"
+              href="https://opensea.io"
               rel="noopener noreferrer"
               className=" p-2 bg-black rounded-full hover:bg-green"
             >
