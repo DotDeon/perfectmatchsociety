@@ -733,7 +733,7 @@ export default function Home() {
       });
     // } else {
     // console.log('cant mint');
-    setMintMsg('Not Whitelisted');
+    // setMintMsg('Not Whitelisted');
     // console.log(blockchain.account);
     // }
     // blockchain.smartContract.methods
