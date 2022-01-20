@@ -904,7 +904,7 @@ export default function Home() {
   }, [blockchain.smartContract, dispatch]);
 
   useEffect(() => {
-    const target = new Date('2022-01-17T23:00:00.000+01:00');
+    const target = new Date('2022-01-20T23:00:00.000+01:00');
 
     const interval = setInterval(() => {
       const now = new Date();
