@@ -708,29 +708,29 @@ export default function Home() {
       }
     });
     // if (matches) {
-    //   var value = '0.01';
+    var value = '0.01';
     //   setMintMsg('Busy');
 
-    //   blockchain.smartContract.methods
-    //     .mint(nftQTY)
-    //     .send({
-    //       from: blockchain.account,
+    blockchain.smartContract.methods
+      .mint(nftQTY)
+      .send({
+        from: blockchain.account,
 
-    //       value: blockchain.web3.utils.toWei(
-    //         (value * nftQTY).toString(),
-    //         'ether'
-    //       ),
-    //     })
-    //     .once('error', (err) => {
-    //       setMintMsg('Mint');
-    //     })
-    //     .then((receipt) => {
-    //       //   setClaimingNFT(false);
-    //       setMintMsg('Mint');
+        value: blockchain.web3.utils.toWei(
+          (value * nftQTY).toString(),
+          'ether'
+        ),
+      })
+      .once('error', (err) => {
+        setMintMsg('Mint');
+      })
+      .then((receipt) => {
+        //   setClaimingNFT(false);
+        setMintMsg('Mint');
 
-    //       // createNFTs();
-    //       //setFeedback("Success");
-    //     });
+        // createNFTs();
+        //setFeedback("Success");
+      });
     // } else {
     // console.log('cant mint');
     setMintMsg('Not Whitelisted');
@@ -809,55 +809,55 @@ export default function Home() {
     if (blockchain.account !== '' && blockchain.smartContract !== null) {
       dispatch(fetchData(blockchain.account));
 
-      blockchain.smartContract.methods
-        .onlyWhitelisted()
-        .call()
-        .then(function (onlyWhitelist) {
-          if (onlyWhitelist === true) {
-            var isWhitelisted;
-            blockchain.smartContract.methods
-              .isWhitelisted(blockchain.account)
-              .call()
-              .then(function (whitelisted) {
-                var isWhitelisted = whitelisted;
+      // blockchain.smartContract.methods
+      //   .onlyWhitelisted()
+      //   .call()
+      //   .then(function (onlyWhitelist) {
+      //     if (onlyWhitelist === true) {
+      //       var isWhitelisted;
+      //       blockchain.smartContract.methods
+      //         .isWhitelisted(blockchain.account)
+      //         .call()
+      //         .then(function (whitelisted) {
+      //           var isWhitelisted = whitelisted;
 
-                if (isWhitelisted === true) {
-                  blockchain.smartContract.methods
-                    .isVIP(blockchain.account)
-                    .call()
-                    .then(function (VIP) {
-                      if (VIP === true) {
-                        blockchain.smartContract.methods
-                          .qtyLeftForVIP(blockchain.account)
-                          .call()
-                          .then(function (mintNUM) {
-                            setQtyLeft(mintNUM);
-                          });
-                      } else {
-                        blockchain.smartContract.methods
-                          .qtyLeftForUser(blockchain.account)
-                          .call()
-                          .then(function (mintNUM) {
-                            setQtyLeft(mintNUM);
-                          });
-                      }
-                    });
-                }
-              });
-          } else {
-            blockchain.smartContract.methods
-              .qtyLeftForUser(blockchain.account)
-              .call()
-              .then(function (mintNUM) {
-                setQtyLeft(mintNUM);
-              });
-          }
-        });
+      //           if (isWhitelisted === true) {
+      // blockchain.smartContract.methods
+      //   .isVIP(blockchain.account)
+      //   .call()
+      //   .then(function (VIP) {
+      //     if (VIP === true) {
+      //       blockchain.smartContract.methods
+      //         .qtyLeftForVIP(blockchain.account)
+      //         .call()
+      //         .then(function (mintNUM) {
+      //           setQtyLeft(mintNUM);
+      //         });
+      //     } else {
+      // blockchain.smartContract.methods
+      //   .qtyLeftForUser(blockchain.account)
+      //   .call()
+      //   .then(function (mintNUM) {
+      //     setQtyLeft(mintNUM);
+      //   });
+      //         }
+      //       });
+      //   }
+      // });
+      // } else {
+      // blockchain.smartContract.methods
+      //   .qtyLeftForUser(blockchain.account)
+      //   .call()
+      //   .then(function (mintNUM) {
+      //      setQtyLeft(mintNUM);
+      // });
+      // }
+      // };
     }
   }, [blockchain.smartContract, dispatch]);
 
   useEffect(() => {
-    const target = new Date('2022-01-20T23:00:00.000+01:00');
+    const target = new Date('2022-01-17T23:00:00.000+01:00');
 
     const interval = setInterval(() => {
       const now = new Date();
