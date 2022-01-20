@@ -716,29 +716,56 @@ export default function Home() {
     });
     if (matches) {
       setMintMsg('Busy');
-      blockchain.smartContract.methods
-        .mint(_amount)
-        .send({
-          gasLimit: '285000',
-          to: blockchain.account,
-          from: blockchain.account,
-          value: blockchain.web3.utils.toWei(
-            (0.01 * _amount).toString(),
-            'ether'
-          ),
-        })
-        .once('error', (err) => {
-          console.log(err);
-          // setFeedback('Sorry, something went wrong please try again later.');
-          // setClaimingNft(false);
-        })
-        .then((receipt) => {
-          // setFeedback(
-          //   'WOW, you now own a Nerdy Coder Clone. go visit Opensea.io to view it.'
-          // );
-          // setClaimingNft(false);
-          dispatch(fetchData(blockchain.account));
-        });
+
+      if (_amount < 10) {
+        blockchain.smartContract.methods
+          .mint(_amount)
+          .send({
+            gasLimit: '285000',
+            to: blockchain.account,
+            from: blockchain.account,
+            value: blockchain.web3.utils.toWei(
+              (0.01 * _amount).toString(),
+              'ether'
+            ),
+          })
+          .once('error', (err) => {
+            console.log(err);
+            // setFeedback('Sorry, something went wrong please try again later.');
+            // setClaimingNft(false);
+          })
+          .then((receipt) => {
+            // setFeedback(
+            //   'WOW, you now own a Nerdy Coder Clone. go visit Opensea.io to view it.'
+            // );
+            // setClaimingNft(false);
+            dispatch(fetchData(blockchain.account));
+          });
+      } else {
+        blockchain.smartContract.methods
+          .mint(_amount)
+          .send({
+            gasLimit: '400000',
+            to: blockchain.account,
+            from: blockchain.account,
+            value: blockchain.web3.utils.toWei(
+              (0.01 * _amount).toString(),
+              'ether'
+            ),
+          })
+          .once('error', (err) => {
+            console.log(err);
+            // setFeedback('Sorry, something went wrong please try again later.');
+            // setClaimingNft(false);
+          })
+          .then((receipt) => {
+            // setFeedback(
+            //   'WOW, you now own a Nerdy Coder Clone. go visit Opensea.io to view it.'
+            // );
+            // setClaimingNft(false);
+            dispatch(fetchData(blockchain.account));
+          });
+      }
     } else {
       setMintMsg('Not Whitelisted');
     }
@@ -1076,108 +1103,131 @@ export default function Home() {
               Cats x WGMInterface. They are randomly generated and composed of a
               variety of hand-drawn traits
             </p>
-            {launchTime ? (
-              <div className=" flex flex-col items-start justify-center mt-12">
-                <div className="flex flex-row justify-center ml-24">
-                  <p className="text-black text-center text-lg ">
-                    {' '}
-                    {(parseFloat(0.01) * nftQTY).toString()} ETH
-                  </p>
-                </div>
+            {/* {launchTime ? ( */}
+            <div className=" flex flex-col items-start justify-center mt-12">
+              <div className="flex flex-row justify-center ml-24">
+                <p className="text-black text-center text-lg ">
+                  {' '}
+                  {(parseFloat(0.01) * nftQTY).toString()} ETH
+                </p>
+              </div>
 
-                <div className="flex flex-row justify-start">
-                  <p className="mr-4 font-bold text-black">1</p>
-                  <Slider
-                    styles={{
-                      track: {
-                        backgroundColor: '#000000',
-                      },
-                      active: {
-                        backgroundColor: '#ffd0e6',
-                      },
+              <div className="flex flex-row justify-start">
+                <p className="mr-4 font-bold text-black">1</p>
+                <Slider
+                  styles={{
+                    track: {
+                      backgroundColor: '#000000',
+                    },
+                    active: {
+                      backgroundColor: '#ffd0e6',
+                    },
+                  }}
+                  axis="x"
+                  className="mt-2"
+                  xmax={qtyLeft}
+                  xmin={minMint}
+                  x={nftQTY}
+                  onChange={({ x }) => {
+                    if (mintMSG.substr(0, 4) == 'MINT') {
+                      setNFTQty(x);
+                      setMintMsg('MINT' + ' ' + x);
+                    }
+                  }}
+                />
+                <p className="ml-4 font-bold text-black">{qtyLeft}</p>
+              </div>
+              <div className="mt-4 flex flex-row items-center space-x-14">
+                {blockchain.account === '' ||
+                blockchain.smartContract === null ? (
+                  <a
+                    className=" bg-blue px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg border-2 border-black rounded-full text-black font-bold hover:bg-black hover:text-purple text-center cursor-pointer"
+                    onClick={(e) => {
+                      // e.preventDefault();
+                      dispatch(connect());
                     }}
-                    axis="x"
-                    className="mt-2"
-                    xmax={qtyLeft}
-                    xmin={minMint}
-                    x={nftQTY}
-                    onChange={({ x }) => {
-                      if (mintMSG.substr(0, 4) == 'MINT') {
-                        setNFTQty(x);
-                        setMintMsg('MINT' + ' ' + x);
-                      }
-                    }}
-                  />
-                  <p className="ml-4 font-bold text-black">{qtyLeft}</p>
-                </div>
-                <div className="mt-4 flex flex-row items-center space-x-14">
-                  {blockchain.account === '' ||
-                  blockchain.smartContract === null ? (
-                    <a
-                      className=" bg-blue px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg border-2 border-black rounded-full text-black font-bold hover:bg-black hover:text-purple text-center cursor-pointer"
-                      onClick={(e) => {
-                        // e.preventDefault();
-                        dispatch(connect());
-                      }}
-                    >
-                      {' '}
-                      Connect Wallet
-                    </a>
-                  ) : (
-                    <a
-                      className=" bg-black px-7  md:px-12 py-4 2xl:py-6 2xl:px-24 2xl:text-lg rounded-full text-white font-bold hover:bg-green hover:text-purple text-center cursor-pointer"
-                      onClick={(e) => {
-                        // e.preventDefault();
-                        claimNFT(nftQTY);
-                      }}
-                    >
-                      {mintMSG}
-                    </a>
-                  )}
-                  <a className="text-black font-bold text-2xl mt-4 text-center ">
+                  >
                     {' '}
-                    10,000/ 10,000 left
+                    Connect Wallet
                   </a>
-                </div>
+                ) : (
+                  <a
+                    className=" bg-black px-7  md:px-12 py-4 2xl:py-6 2xl:px-24 2xl:text-lg rounded-full text-white font-bold hover:bg-green hover:text-purple text-center cursor-pointer"
+                    onClick={(e) => {
+                      // e.preventDefault();
+                      claimNFT(nftQTY);
+                    }}
+                  >
+                    {mintMSG}
+                  </a>
+                )}
+                <a className="text-black font-bold text-2xl mt-4 text-center ">
+                  {' '}
+                  10,000/ 10,000 left
+                </a>
               </div>
-            ) : (
-              <div className="flex flex-row justify-center md:justify-start mt-12">
-                <div className="flex flex-row justify-center bg-blue px-4 rounded-3xl">
-                  <div className="flex flex-col mr-2 md:mr-4  w-20 md:w-32 h-24 md:h-32 items-center justify-center rounded-full">
-                    <span className="text-black text-3xl md:text-5xl font-Raleway font-extrabold">
-                      {days}
-                    </span>
-                    <span className="text-black text-xs md:text-base font-Raleway ">
-                      DAYS
-                    </span>
-                  </div>
-                  <div className="flex flex-col mr-2 md:mr-4  w-24 md:w-32 h-24 md:h-32 items-center justify-center rounded-full">
-                    <span className="text-black text-3xl md:text-5xl font-Raleway font-extrabold">
-                      {hours}
-                    </span>
-                    <span className="text-black text-xs md:text-base font-Raleway ">
-                      HOURS
-                    </span>
-                  </div>
-                  <div className="flex flex-col mr-2 md:mr-4  w-24 md:w-32 h-24 md:h-32 items-center justify-center rounded-full">
-                    <span className="text-black text-3xl md:text-5xl font-Raleway font-extrabold">
-                      {minutes}
-                    </span>
-                    <span className="text-black text-xs md:text-base font-Raleway ">
-                      MINUTES
-                    </span>
-                  </div>
-                  <div className="flex flex-col mr-2 md:mr-4  w-24 md:w-32 h-24 md:h-32 items-center justify-center rounded-full">
-                    <span className="text-black text-3xl md:text-5xl font-Raleway font-extrabold">
-                      {seconds}
-                    </span>
-                    <span className="text-black text-xs md:text-base font-Raleway ">
-                      SECONDS
-                    </span>
-                  </div>
+            </div>
+            {/* // ) : ( //{' '}
+            <div className="flex flex-row justify-center md:justify-start mt-12">
+              //{' '}
+              <div className="flex flex-row justify-center bg-blue px-4 rounded-3xl">
+                //{' '}
+                <div className="flex flex-col mr-2 md:mr-4  w-20 md:w-32 h-24 md:h-32 items-center justify-center rounded-full">
+                  //{' '}
+                  <span className="text-black text-3xl md:text-5xl font-Raleway font-extrabold">
+                    // {days}
+                    //{' '}
+                  </span>
+                  //{' '}
+                  <span className="text-black text-xs md:text-base font-Raleway ">
+                    // DAYS //{' '}
+                  </span>
+                  //{' '}
                 </div>
+                //{' '}
+                <div className="flex flex-col mr-2 md:mr-4  w-24 md:w-32 h-24 md:h-32 items-center justify-center rounded-full">
+                  //{' '}
+                  <span className="text-black text-3xl md:text-5xl font-Raleway font-extrabold">
+                    // {hours}
+                    //{' '}
+                  </span>
+                  //{' '}
+                  <span className="text-black text-xs md:text-base font-Raleway ">
+                    // HOURS //{' '}
+                  </span>
+                  //{' '}
+                </div>
+                //{' '}
+                <div className="flex flex-col mr-2 md:mr-4  w-24 md:w-32 h-24 md:h-32 items-center justify-center rounded-full">
+                  //{' '}
+                  <span className="text-black text-3xl md:text-5xl font-Raleway font-extrabold">
+                    // {minutes}
+                    //{' '}
+                  </span>
+                  //{' '}
+                  <span className="text-black text-xs md:text-base font-Raleway ">
+                    // MINUTES //{' '}
+                  </span>
+                  //{' '}
+                </div>
+                //{' '}
+                <div className="flex flex-col mr-2 md:mr-4  w-24 md:w-32 h-24 md:h-32 items-center justify-center rounded-full">
+                  //{' '}
+                  <span className="text-black text-3xl md:text-5xl font-Raleway font-extrabold">
+                    // {seconds}
+                    //{' '}
+                  </span>
+                  //{' '}
+                  <span className="text-black text-xs md:text-base font-Raleway ">
+                    // SECONDS //{' '}
+                  </span>
+                  //{' '}
+                </div>
+                //{' '}
               </div>
-            )}
+              //{' '}
+            </div>
+            // )} */}
           </div>
           <div className="hidden md:flex  flex-row md:items-start  items-center">
             <Image
