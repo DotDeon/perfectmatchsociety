@@ -37,6 +37,7 @@ export default function Home() {
   const [qtyLeft, setQtyLeft] = useState(20);
   const [minMint, setMinMint] = useState(1);
   const [mintMSG, setMintMsg] = useState('MINT 1');
+  const [avalMint, setAvailMint] = useState(10000);
 
   const [launchTime, setlaunchTime] = useState(false);
   const [days, setDays] = useState(0);
@@ -883,7 +884,14 @@ export default function Home() {
     // console.log(blockchain.smartContract);
     if (blockchain.account !== '' && blockchain.smartContract !== null) {
       dispatch(fetchData(blockchain.account));
-
+      blockchain.smartContract.methods
+        .totalSupply()
+        .call()
+        .then(function (s) {
+          // const s = y;
+          // console.log('Supply: ' + s);
+          setAvailMint(10000 - parseInt(s));
+        });
       // blockchain.smartContract.methods
       //   .onlyWhitelisted()
       //   .call()
@@ -1163,7 +1171,7 @@ export default function Home() {
                 )}
                 <a className="text-black font-bold text-2xl mt-4 text-center ">
                   {' '}
-                  10,000/ 10,000 left
+                  {avalMint}/ 10,000 left
                 </a>
               </div>
             </div>
