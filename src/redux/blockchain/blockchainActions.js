@@ -1,6 +1,6 @@
 // constants
 import Web3 from 'web3';
-import SmartContract from '../../contracts/SmartContract.json';
+import SmartContract from '../../contracts/PMS.json';
 // log
 import { fetchData } from '../data/dataActions';
 
@@ -45,11 +45,11 @@ export const connect = () => {
         });
         //const NetworkData = await SmartContract.networks[networkId];
         // change network ID to 1
-        if (networkId == 1) {
+        if (networkId == 4) {
           const SmartContractObj = new web3.eth.Contract(
-            SmartContract.abi,
-            // '0x002B8f409723e2A762a8EC86552bc336CCd17948'
-            '0xf51e3D4c0dFBc440De5Ab34d3B658E342DF26388'
+            SmartContract,
+            '0xD3E92dbcb6d9370C5684425511909A8f261C3984'
+            // '0xf51e3D4c0dFBc440De5Ab34d3B658E342DF26388'
           );
           dispatch(
             connectSuccess({
