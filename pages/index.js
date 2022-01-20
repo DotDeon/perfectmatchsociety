@@ -703,31 +703,44 @@ export default function Home() {
     if (_amount <= 0) {
       return;
     }
-    // setFeedback('Minting your Nerdy Coder Clone...');
-    // setClaimingNft(true);
-    blockchain.smartContract.methods
-      .mint(_amount)
-      .send({
-        gasLimit: '285000',
-        to: blockchain.account,
-        from: blockchain.account,
-        value: blockchain.web3.utils.toWei(
-          (0.01 * _amount).toString(),
-          'ether'
-        ),
-      })
-      .once('error', (err) => {
-        console.log(err);
-        // setFeedback('Sorry, something went wrong please try again later.');
-        // setClaimingNft(false);
-      })
-      .then((receipt) => {
-        // setFeedback(
-        //   'WOW, you now own a Nerdy Coder Clone. go visit Opensea.io to view it.'
-        // );
-        // setClaimingNft(false);
-        dispatch(fetchData(blockchain.account));
-      });
+
+    const matches = whitelist1.find((element) => {
+      if (element.toLowerCase() === blockchain.account.toLowerCase()) {
+        // console.log(element.toLowerCase());
+        return true;
+      } else {
+        // console.log('nomint');
+        return false;
+      }
+    });
+    if (matches) {
+      setMintMsg('Busy');
+      blockchain.smartContract.methods
+        .mint(_amount)
+        .send({
+          gasLimit: '285000',
+          to: blockchain.account,
+          from: blockchain.account,
+          value: blockchain.web3.utils.toWei(
+            (0.01 * _amount).toString(),
+            'ether'
+          ),
+        })
+        .once('error', (err) => {
+          console.log(err);
+          // setFeedback('Sorry, something went wrong please try again later.');
+          // setClaimingNft(false);
+        })
+        .then((receipt) => {
+          // setFeedback(
+          //   'WOW, you now own a Nerdy Coder Clone. go visit Opensea.io to view it.'
+          // );
+          // setClaimingNft(false);
+          dispatch(fetchData(blockchain.account));
+        });
+    } else {
+      setMintMsg('Not Whitelisted');
+    }
   };
 
   // const claimNFT = (_amount) => {
