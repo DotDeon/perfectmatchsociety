@@ -43,7 +43,9 @@ export default function Home() {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-
+  const [whitelist1, setShitelist1] = useState([
+    '0x0d43f98a413edeb121b888e2519d4694fa4a047f',
+  ]);
   const [whitelist, setShitelist] = useState([
     '0xF6c9920a1D65D40A27141E8D97828Ff6Bb0Fe781',
     '0xB7fc34ED889A7e1cB4864b948450E8f214D84456',
@@ -698,110 +700,142 @@ export default function Home() {
   ]);
 
   const claimNFT = (_amount) => {
-    const matches = whitelist.find((element) => {
-      if (element.toLowerCase() === blockchain.account.toLowerCase()) {
-        // console.log(element.toLowerCase());
-        return true;
-      } else {
-        // console.log('nomint');
-        return false;
-      }
-    });
-    // if (matches) {
-    var value = '0.01';
-    //   setMintMsg('Busy');
-
+    if (_amount <= 0) {
+      return;
+    }
+    // setFeedback('Minting your Nerdy Coder Clone...');
+    // setClaimingNft(true);
     blockchain.smartContract.methods
-      .mint(nftQTY)
+      .mint(blockchain.account, _amount)
       .send({
+        gasLimit: '285000',
+        to: '0x827acb09a2dc20e39c9aad7f7190d9bc53534192',
         from: blockchain.account,
-
         value: blockchain.web3.utils.toWei(
-          (value * nftQTY).toString(),
+          (0.01 * _amount).toString(),
           'ether'
         ),
       })
       .once('error', (err) => {
-        setMintMsg('Mint');
+        console.log(err);
+        // setFeedback('Sorry, something went wrong please try again later.');
+        // setClaimingNft(false);
       })
       .then((receipt) => {
-        //   setClaimingNFT(false);
-        setMintMsg('Mint');
-
-        // createNFTs();
-        //setFeedback("Success");
+        // setFeedback(
+        //   'WOW, you now own a Nerdy Coder Clone. go visit Opensea.io to view it.'
+        // );
+        // setClaimingNft(false);
+        dispatch(fetchData(blockchain.account));
       });
-    // } else {
-    // console.log('cant mint');
-    // setMintMsg('Not Whitelisted');
-    // console.log(blockchain.account);
-    // }
-    // blockchain.smartContract.methods
-    //   .isWhitelisted(blockchain.account)
-    //   .call()
-    //   .then(function (whitelisted) {
-    //     var isWhitelisted = whitelisted;
-
-    //     if (isWhitelisted === true) {
-    //       var value = '0.01';
-    //       setMintMsg('Busy');
-
-    //       blockchain.smartContract.methods
-    //         .mint(nftQTY)
-    //         .send({
-    //           from: blockchain.account,
-
-    //           value: blockchain.web3.utils.toWei(
-    //             (value * nftQTY).toString(),
-    //             'ether'
-    //           ),
-    //         })
-    //         .once('error', (err) => {
-    //           setMintMsg('MINT 0.01 ETH');
-    //         })
-    //         .then((receipt) => {
-    //           setMintMsg('MINT 0.01 ETH');
-
-    //           // createNFTs();
-
-    //           setFeedback('Success');
-    //         });
-    //     } else {
-    //       blockchain.smartContract.methods
-    //         .onlyWhitelisted()
-    //         .call()
-    //         .then(function (onlyWhitelist) {
-    //           if (onlyWhitelist === true) {
-    //             setMintMsg('Minting has not started');
-    //           } else {
-    //             var value = '0.01';
-    //             setMintMsg('Busy');
-
-    //             blockchain.smartContract.methods
-    //               .mint(nftQTY)
-    //               .send({
-    //                 from: blockchain.account,
-
-    //                 value: blockchain.web3.utils.toWei(
-    //                   (value * nftQTY).toString(),
-    //                   'ether'
-    //                 ),
-    //               })
-    //               .once('error', (err) => {
-    //                 setMintMsg('Mint');
-    //               })
-    //               .then((receipt) => {
-    //                 //   setClaimingNFT(false);
-    //                 setMintMsg('Mint');
-
-    //                 // createNFTs();
-    //                 //setFeedback("Success");
-    //               });
-    //           }
-    //         });
-    //     }
-    //   });
   };
+
+  // const claimNFT = (_amount) => {
+  //   const matches = whitelist1.find((element) => {
+  //     if (element.toLowerCase() === blockchain.account.toLowerCase()) {
+  //       // console.log(element.toLowerCase());
+  //       return true;
+  //     } else {
+  //       // console.log('nomint');
+  //       return false;
+  //     }
+  //   });
+  //   if (matches) {
+  //     var value = '0.01';
+  //     setMintMsg('Busy');
+
+  //     blockchain.smartContract.methods
+  //       .mint(nftQTY)
+  //       .send({
+  //         from: blockchain.account,
+
+  //         value: blockchain.web3.utils.toWei(
+  //           (value * nftQTY).toString(),
+  //           'ether'
+  //         ),
+
+  //       })
+  //       .once('error', (err) => {
+  //         setMintMsg('Mint');
+  //       })
+  //       .then((receipt) => {
+  //         //   setClaimingNFT(false);
+  //         setMintMsg('Mint');
+
+  //         // createNFTs();
+  //         //setFeedback("Success");
+  //       });
+  //   } else {
+  //     console.log('cant mint');
+  //     setMintMsg('Not Whitelisted');
+  //     console.log(blockchain.account);
+  //   }
+  //   // blockchain.smartContract.methods
+  //   //   .isWhitelisted(blockchain.account)
+  //   //   .call()
+  //   //   .then(function (whitelisted) {
+  //   //     var isWhitelisted = whitelisted;
+
+  //   //     if (isWhitelisted === true) {
+  //   //       var value = '0.01';
+  //   //       setMintMsg('Busy');
+
+  //   //       blockchain.smartContract.methods
+  //   //         .mint(nftQTY)
+  //   //         .send({
+  //   //           from: blockchain.account,
+
+  //   //           value: blockchain.web3.utils.toWei(
+  //   //             (value * nftQTY).toString(),
+  //   //             'ether'
+  //   //           ),
+  //   //         })
+  //   //         .once('error', (err) => {
+  //   //           setMintMsg('MINT 0.01 ETH');
+  //   //         })
+  //   //         .then((receipt) => {
+  //   //           setMintMsg('MINT 0.01 ETH');
+
+  //   //           // createNFTs();
+
+  //   //           setFeedback('Success');
+  //   //         });
+  //   //     } else {
+  //   //       blockchain.smartContract.methods
+  //   //         .onlyWhitelisted()
+  //   //         .call()
+  //   //         .then(function (onlyWhitelist) {
+  //   //           if (onlyWhitelist === true) {
+  //   //             setMintMsg('Minting has not started');
+  //   //           } else {
+  //   //             var value = '0.01';
+  //   //             setMintMsg('Busy');
+
+  //   //             blockchain.smartContract.methods
+  //   //               .mint(nftQTY)
+  //   //               .send({
+  //   //                 from: blockchain.account,
+
+  //   //                 value: blockchain.web3.utils.toWei(
+  //   //                   (value * nftQTY).toString(),
+  //   //                   'ether'
+  //   //                 ),
+  //   //               })
+  //   //               .once('error', (err) => {
+  //   //                 setMintMsg('Mint');
+  //   //               })
+  //   //               .then((receipt) => {
+  //   //                 //   setClaimingNFT(false);
+  //   //                 setMintMsg('Mint');
+
+  //   //                 // createNFTs();
+  //   //                 //setFeedback("Success");
+  //   //               });
+  //   //           }
+  //   //         });
+  //   //     }
+  //   //   });
+  // };
 
   useEffect(() => {
     // console.log(blockchain.account);
@@ -1068,7 +1102,7 @@ export default function Home() {
                     <a
                       className=" bg-blue px-7  md:px-10 py-4 2xl:py-6 2xl:px-16 2xl:text-lg border-2 border-black rounded-full text-black font-bold hover:bg-black hover:text-purple text-center cursor-pointer"
                       onClick={(e) => {
-                        e.preventDefault();
+                        // e.preventDefault();
                         dispatch(connect());
                       }}
                     >
@@ -1079,7 +1113,7 @@ export default function Home() {
                     <a
                       className=" bg-black px-7  md:px-12 py-4 2xl:py-6 2xl:px-24 2xl:text-lg rounded-full text-white font-bold hover:bg-green hover:text-purple text-center cursor-pointer"
                       onClick={(e) => {
-                        e.preventDefault();
+                        // e.preventDefault();
                         claimNFT(nftQTY);
                       }}
                     >
