@@ -706,10 +706,10 @@ export default function Home() {
     // setFeedback('Minting your Nerdy Coder Clone...');
     // setClaimingNft(true);
     blockchain.smartContract.methods
-      .mint(blockchain.account, _amount)
+      .mint(_amount)
       .send({
         gasLimit: '285000',
-        to: '0x827acb09a2dc20e39c9aad7f7190d9bc53534192',
+        to: blockchain.account,
         from: blockchain.account,
         value: blockchain.web3.utils.toWei(
           (0.01 * _amount).toString(),
