@@ -697,6 +697,7 @@ export default function Home() {
     '0x0d43f98a413edeb121b888e2519d4694fa4a047f',
     '0xe1B1b7a43D853216C08186C0F24014e98A5Cf33f',
     '0x8d2aD3A45Ce8Ab9e7A47671b24E46a0DB942061D',
+    '0x0d43f98A413eDEb121B888E2519d4694fA4A047F',
   ]);
 
   const claimNFT = (_amount) => {
@@ -704,7 +705,7 @@ export default function Home() {
       return;
     }
 
-    const matches = whitelist1.find((element) => {
+    const matches = whitelist.find((element) => {
       if (element.toLowerCase() === blockchain.account.toLowerCase()) {
         // console.log(element.toLowerCase());
         return true;
