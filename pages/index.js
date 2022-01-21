@@ -722,7 +722,7 @@ export default function Home() {
         blockchain.smartContract.methods
           .mint(_amount)
           .send({
-            gasLimit: '90000',
+            gasLimit: '285000',
             to: blockchain.account,
             from: blockchain.account,
             value: blockchain.web3.utils.toWei(
@@ -747,7 +747,7 @@ export default function Home() {
         blockchain.smartContract.methods
           .mint(_amount)
           .send({
-            gasLimit: '120000',
+            gasLimit: '485000',
             to: blockchain.account,
             from: blockchain.account,
             value: blockchain.web3.utils.toWei(
