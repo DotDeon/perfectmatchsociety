@@ -44,10 +44,10 @@ export default function Home() {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-  const [whitelist1, setShitelist1] = useState([
+  const [whitelist, setShitelist1] = useState([
     '0xd13be01F84AC0055A125A796bb179085e6b6f91E',
   ]);
-  const [whitelist, setShitelist] = useState([
+  const [whitelist1, setShitelist] = useState([
     '0xF6c9920a1D65D40A27141E8D97828Ff6Bb0Fe781',
     '0xB7fc34ED889A7e1cB4864b948450E8f214D84456',
     '0xB26dB09638Da0fA913E6E31139b969d03eA7481F',
