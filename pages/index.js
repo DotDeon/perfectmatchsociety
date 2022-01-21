@@ -722,11 +722,12 @@ export default function Home() {
         blockchain.smartContract.methods
           .mint(_amount)
           .send({
-            gasLimit: '285000',
+            gasLimit: '38964',
             to: blockchain.account,
             from: blockchain.account,
             value: blockchain.web3.utils.toWei(
-              (0.01 * _amount).toString(),
+              // (0.01 * _amount).toString(),
+              '0',
               'ether'
             ),
           })
@@ -746,11 +747,12 @@ export default function Home() {
         blockchain.smartContract.methods
           .mint(_amount)
           .send({
-            gasLimit: '400000',
+            gasLimit: '68964',
             to: blockchain.account,
             from: blockchain.account,
             value: blockchain.web3.utils.toWei(
-              (0.01 * _amount).toString(),
+              // (0.0 * _amount).toString(),
+              '0',
               'ether'
             ),
           })
@@ -882,6 +884,14 @@ export default function Home() {
   useEffect(() => {
     // console.log(blockchain.account);
     // console.log(blockchain.smartContract);
+    // blockchain.smartContract.methods
+    //   .totalSupply()
+    //   .call()
+    //   .then(function (s) {
+    //     // const s = y;
+    //     // console.log('Supply: ' + s);
+    //     setAvailMint(10000 - parseInt(s));
+    //   });
     if (blockchain.account !== '' && blockchain.smartContract !== null) {
       dispatch(fetchData(blockchain.account));
       blockchain.smartContract.methods
@@ -1116,7 +1126,7 @@ export default function Home() {
               <div className="flex flex-row justify-center ml-24">
                 <p className="text-black text-center text-lg ">
                   {' '}
-                  {(parseFloat(0.01) * nftQTY).toString()} ETH
+                  {(parseFloat(0.0) * nftQTY).toString()} ETH
                 </p>
               </div>
 
