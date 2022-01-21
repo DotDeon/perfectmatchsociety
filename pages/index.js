@@ -770,7 +770,7 @@ export default function Home() {
           });
       }
     } else {
-      setMintMsg('Not Whitelisted');
+      setMintMsg('We will be right back');
     }
   };
 
