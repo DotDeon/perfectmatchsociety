@@ -1,34 +1,13 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+#Perfect Match Society NFT Project
 
-## Getting Started
+Perfect Match Society was one of my first fullstack NFT projects, and it was a great opportunity for me to learn more about Ethereum blockchain and NFTs. The project was inspired by Doodles x Cool Cats x WGMInterface, and it consisted of a collection of 10,000 randomly generated PMS living on the Ethereum blockchain.
 
-First, run the development server:
+As the sole developer for the project, I was responsible for everything from generating the images and JSON files from assets to writing the smart contract and the front-end. The project required me to learn a lot of new technologies, including Solidity for the smart contract, web3.js for interacting with the Ethereum network, and React for the front-end.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+The PMS NFTs were randomly generated and composed of a variety of hand-drawn traits. Users could mint PMS NFTs using Ether, and they could also buy and sell them on the secondary market. The project was a lot of fun to work on, and it was a great way to explore the possibilities of NFTs and the Ethereum blockchain.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+However, it's worth noting that the Perfect Match Society site is no longer in use, so the code is available on my GitHub repository for educational purposes only. Despite the project no longer being actively maintained or used, I am still proud of the work I did on it and what I learned during the process.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+#Conclusion
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Perfect Match Society was a challenging project that allowed me to dive deeper into the world of Ethereum blockchain and NFTs. As the sole developer for the project, I had to learn a lot of new technologies and overcome many challenges along the way. Although the site is no longer in use, I am proud of the work I did on it and the skills I gained during the development process.
